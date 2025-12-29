@@ -1,14 +1,19 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
-import './index.css'
-import { Provider } from 'react-redux'
-import store from './store.js'
+import { createSlice } from '@reduxjs/toolkit';
+export const mealsSlice = createSlice({
+  name: 'meals',
+  initialState: [
+    { name: 'Breakfast', cost: 50, selected: false },
+{ name: 'High Tea', cost: 25, selected: false },
+{ name: 'Lunch', cost: 65, selected: false },
+{ name: 'Dinner', cost: 70, selected: false },
+   
+  ],
+  reducers: {
+    toggleMealSelection: (state, action) => {
+        state[action.payload].selected = !state[action.payload].selected;
+  },
+  },
+});
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <Provider store={store}>
-    <App />
-    </Provider>
-  </React.StrictMode>,
-)
+export const { toggleMealSelection } = mealsSlice.actions;
+export default mealsSlice.reducer;
